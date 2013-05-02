@@ -1,8 +1,0 @@
-<div class='osiguranik'>
-<% fields_for "polica[osiguranik_attributes][]", osiguranik do |osiguranik_form| %>
-    <p>
-      Osiguranik: <%= osiguranik_form.text_field :partner_id %>
-     <%= link_to_function "remove", "$(this).up('.osiguranik').remove()" %>
-     </p>
-<% end %>
-</div>

@@ -1,8 +1,0 @@
-<div style="float:right; width:180px">
-  <div class="search-span">
-    <input onclick="touchSearchBox(this)" onkeypress="touchSearchBox(this)" type="text" id="<%= id %>-search-query" 
-      value='<%= if search_query.blank? then 'Pretraga...' else search_query end %>' class="<%= if search_query.blank? then 'message' end %>">
-    <a href="javascript:<%= name %>.search()"></a>
-  </div>
-</div>
-
