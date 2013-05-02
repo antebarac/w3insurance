@@ -1,0 +1,88 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+hr:
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      short: "%e. %b"
+      long: "%e. %B %Y"
+      only_day: "%e"
+    day_names: [Nedjelja, Ponedjeljak, Utorak, Srijeda, Četvrtak, Petak, Subota]
+    abbr_day_names: [Ned, Pon, Uto, Sri, Čet, Pet, Sub]
+    month_names: [~, Siječanj, Veljača, Ožujak, Travanj, Svibanj, Lipanj, Srpanj, Kolovoz, Rujan, Listopad, Studeni, Prosinac]
+    abbr_month_names: [~, Sij, Vel, Ožu, Tra, Svi, Lip, Srp, Kol, Ruj, Lis, Stu, Pro]
+    order: [ :day, :month, :year ]
+  
+  time:
+    formats:
+      default: "%A, %d. %B %Y, %H:%M"
+      short: "%d. %B, %H:%M"
+      long: "%A, %d. %B %Y, %H:%M"
+      time: "%H:%M"
+    am: "prijepodne"
+    pm: "poslijepodne"
+  
+  show: "Prikaži"
+  are_you_sure: "Da li ste sigurni?"
+  add_new: "Dodaj novog"
+  i_want: "Želim..."
+  partner_list: "Popis partnera"
+  settlement: "Naselje"
+  je_uspjesno_dodano: "je uspješno dodano"
+  je_uspjesno_dodana: "je uspješno dodana"
+  address: "Adresa"
+  je_uspjesno_izmijenjena: "je uspješno izmijenjena"
+  je_uspjesno_izmijenjen: "je uspješno izmijenjen"
+  look_at_list: "pogledati popis"
+  partner: "Partner"
+  save: "Spremi"
+  pocetak: "Početak osiguranja"
+  kraj: "Kraj osiguranja"
+  datum_sklapanja: "Datum sklapanja"
+  ugovaratelj: "Ugovaratelj"
+  police: 'Pregled polica'
+  dodatna_osiguranja: Dodatna osiguranja
+  popusti_i_doplatci: Popusti i doplatci
+
+  activerecord:
+    errors: 
+        template: 
+            body: Postoje prolemi sa sljedećim poljima
+            header: 
+                one: "postoji 1 greška zbog kojeg nije moguće potvrditi unos"
+                other: "{{count}} greške zbog kojih nije moguće potvrditi unos"
+        messages:
+            inclusion: "is not included in the list"
+            exclusion: "is reserved"
+            invalid: "is invalid"
+            confirmation: "doesn't match confirmation"
+            accepted: "must be accepted"
+            empty: "can't be empty"
+            blank: "ne smije biti prazan"
+            too_long: "is too long (maximum is {{count}} characters)"
+            too_short: "is too short (minimum is {{count}} characters)"
+            wrong_length: "is the wrong length (should be {{count}} characters)"
+            taken: "has already been taken"
+            not_a_number: "is not a number"
+            greater_than: "must be greater than {{count}}"
+            greater_than_or_equal_to: "must be greater than or equal to {{count}}"
+            equal_to: "must be equal to {{count}}"
+            less_than: "must be less than {{count}}"
+            less_than_or_equal_to: "must be less than or equal to {{count}}"
+            odd: "must be odd"
+            even: "must be even"
+    models:
+         settlement: Naselje
+         address: Adresa
+    attributes:
+         settlement:
+            name: Naziv
+            postal_code: Poštanski broj
+         address:
+            street: Naziv
+            number: Kućni broj
+         polica:
+            pocetak: Početak
+
+

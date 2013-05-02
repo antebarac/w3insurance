@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+  "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset='utf-8'">
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <%= stylesheet_link_tag 'custom-theme/jquery-ui-1.8.2.custom.css' %>
+    <%= stylesheet_link_tag 'screen', :media => "screen" %>
+    <%= stylesheet_link_tag 'print', :media => "print" %>
+		<%= stylesheet_link_tag 'style' %>
+    <%= yield :css %>
+    <!--[if lt IE 8]><%= stylesheet_link_tag 'ie', :media => "screen, projection" %><![endif]-->
+		<%= javascript_include_tag 'jquery-1.4.2.min.js' %>
+		<%= javascript_include_tag 'jquery-ui-1.8.2.custom.min.js' %>
+		<%= javascript_include_tag 'jrails.js' %>
+    <%= javascript_include_tag 'application.js' %>
+    <%= javascript_include_tag 'json2-min.js' %>
+    <%= javascript_include_tag 'jquery.formatCurrency-1.1.0.min.js' %>
+    <%= javascript_include_tag 'i18n/jquery.formatCurrency.hr-HR.js' %>
+    <%= javascript_include_tag 'sifranti.js' %>
+ 		<title>W3O</title>
+		<script type="text/javascript">
+      var defaultCurrencyRegion = "hr-HR";
+
+			_translations = {
+				"OK": "OK",
+				"Now": "Sada",
+				"Today": "Danas",
+				"Clear": "Obrisi"
+			};
+      $(function() { 
+        $(".icon,.icon-link").hover(enterIcon, exitIcon);
+        $(".datepicker").datepicker();
+        $("button, input:submit").each(function(index, element) {
+          $(element).button();
+          var primaryIcon = $(element).attr("primary-icon");
+          var secondaryIcon = $(element).attr("secondary-icon");
+          var iconsValue = { primary: '', secondary: '' }
+          if(primaryIcon != null) iconsValue.primary = 'ui-icon-' + primaryIcon;
+          if(secondaryIcon != null) iconsValue.secondary = 'ui-icon-' + secondaryIcon;
+          if(iconsValue != "") $(element).button('option', 'icons', iconsValue);
+        });
+      });
+		</script>
+    <%= yield :script %>
+	</head>
+	<body>
+		<div class="maxwidth" style="margin-top:2px">
+			<div class="ui-tabs ui-widget ui-widget-content ui-corner-all dropshadow">
+        <div id="header" class="ui-widget-header">
+          <div id="header-image" class="span-12"></div>
+          <div id="header-text" class="span-12">w3o</div>
+          <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix" id="static-tab-header">
+            <li class="ui-state-default ui-corner-top <% if @active_tab == '/police' %>ui-tabs-selected ui-state-active<%end%>"><%= link_to "Police", "/police" %></li>
+            <li class="ui-state-default ui-corner-top <% if @active_tab == '/kontakti' %>ui-tabs-selected ui-state-active<%end%>"><%= link_to "Partneri", "/kontakti" %></li>
+            <li class="ui-state-default ui-corner-top <% if @active_tab == '/administration' %>ui-tabs-selected ui-state-active<%end%>"><%= link_to "Administracija", "/administration"%></li>
+          </ul>
+        </div>
+        <div class="main-panel ui-tabs-panel ui-widget-content ui-corner-bottom container">
+          <div id="info" style="position: absolute; top: 2px; left: 2px; width: 964px;" onmouseover="$(this).hide()">
+          <% flash.each do |key, msg| %>
+            <%= content_tag :div, msg, :class => key.to_s + " ui-corner-all", :id => key, :style => "padding:5px; opacity:0.9" %>
+              <% content_tag :script, :type => "text/javascript" do %>
+                setTimeout(function() { $("div#<%= key %>").fadeOut('slow'); }, 5000);
+              <% end %>
+          <% end %>
+          </div>
+          <div id="titlebar">
+            <h3><%= yield :titlebar %></h3>
+          </div>
+          <%= yield %>
+        </div>
+      </div>
+      <div id="footer"><br/></div>
+    </div>
+ 	</body>
+</html>

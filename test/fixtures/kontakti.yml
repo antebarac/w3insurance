@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ime: MyString
+  prezime: MyString
+  naziv: MyString
+  vrsta: 1
+
+two:
+  ime: MyString
+  prezime: MyString
+  naziv: MyString
+  vrsta: 1

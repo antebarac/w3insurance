@@ -1,0 +1,133 @@
+<script type='text/javascript'>
+
+  var produkt = '<%= params[:produkt] %>'
+  var osiguranje = '<%= params[:osiguranje] %>'
+  var grupa = '<%= params[:grupa] %>'
+   $(function() {
+     $('form#nova_stavka input[type="checkbox"]').change(setValueToNextHidden);
+     $('form#nova_stavka input.optional-check').change(toggleOptionalTextField);
+     $('form#nova_stavka input,form#nova_stavka select').eq(1).focus();
+     $('form#nova_stavka input,form#nova_stavka select').change( function() {
+      $.getJSON('osvjezi_stavku?produkt=' + produkt + '&osiguranje=' + osiguranje + '&grupa=' + grupa, $('form#nova_stavka').serializeArray(),
+        osvjeziStavku)
+     });
+  //  $('form#nova_stavka .money').blur(function () {
+   //   $('.money').formatCurrency({region: defaultCurrencyRegion});
+  //   });
+   }); 
+
+  function osvjeziStavku(data, textStatus)
+  {
+    $.each(data, function(i, item) {
+      $(function(){
+        var parent_div = $("#stavka_" + item.name).parent().parent().parent();
+        var isVisible = parent_div.is(':visible');
+        if (item.visible == true && isVisible == false) 
+        {
+           parent_div.show();
+           $("#stavka_" + item.name).css("background-color","#ffc").animate( { backgroundColor: "white"}, 2500);
+        }
+        if (item.visible == false && isVisible == true ) 
+        {
+           parent_div.hide();
+        }
+      });
+      if (item.name == 'stavka_iznos_premije') $("#stavka_iznos_premije").html(item.text); 
+
+    });
+  }
+  $.fn.focusNextInputField = function() {
+    return this.each(function() {
+      var fields = $(this).parents('form:eq(0),body').find('button,input,textarea,select');
+      var index = fields.index( this );
+      if ( index > -1 && ( index + 1 ) < fields.length ) {
+        fields.eq( index + 1 ).focus();
+    }
+    return false;
+    });
+  };
+
+  function toggleOptionalTextField()
+  {
+    var odabir = "ne";
+    if ($(this).attr("checked") == true)
+    {
+      $(this).parent().parent().find("input[type=text]").parent().show();
+      $(this).parent().parent().find("input[type=text]").css("background-color","#ffc").animate( { backgroundColor: "white"}, 2500);
+      $(this).parent().parent().find("input[type=text][readonly!=readonly]").focus().select();
+      odabir = "da";
+    }
+    else
+    {
+      $(this).parent().parent().find("input[type=text]").parent().hide();
+    }
+    $(this).nextAll("input[type='hidden']").attr("value", odabir);
+  }
+  
+  function setValueToNextHidden()
+  {
+    var odabir = "ne";
+    if ( $(this).attr("checked") == true )
+    {
+      odabir = "da";
+    }
+    $(this).nextAll("input[type='hidden']").attr("value", odabir);
+  }
+</script>
+<% form_for :stavka, @stavka, :html => { :id => "nova_stavka", :onsubmit => "return false;" } do |f| %>
+  <!--
+  <h5>Osnovno osiguranje<h5>
+  -->
+  <% for node in @cjenik.premijska_grupa.render_list %>
+  <div class='form-row'  <% if !node.visible?(@cjenik.premijska_grupa.defaults) %>style='display:none'<% end %> >
+    <% if node.da_ne? %>
+      <div class='form-label chk-fix'>
+        <div class="span-20 last">
+          <% node.get_indent.times do %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <% end %>
+          <%= f.check_box( node.name.to_s + "_check_box" )  %>
+          <%= f.label( node.name.to_s + "_check_box" , t(node.name, :scope => params[:osiguranje].to_sym)) %>
+          <input type="hidden" name='stavka[<%= node.name.to_s %>]' id='stavka_<%=node.name.to_s%>' value='<%= node.default %>'>
+        </div>
+      </div>
+    <% elsif node.optional? %>
+      <div class='form-label chk-fix span-20'  >
+          <span>
+            <% node.get_indent.times do %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <% end %>
+            <%= f.check_box( node.name.to_s + "_check_box", { :class => 'optional-check' } )  %>
+            <%= f.label( node.name.to_s + "_check_box" , t(node.name, :scope => params[:osiguranje].to_sym) + ' ' + node.range_as_string  )  %>
+            <input type="hidden" name='stavka[<%= node.name.to_s %>]' id='stavka_<%=node.name.to_s%>' value='<%= node.default %>'>
+            &nbsp;
+          </span>
+          <span class="quiet" style="display:none">
+            <input id='stavka_<%= node.name.to_s %>_iznos' type="text" name='stavka[<%= node.name.to_s %>_iznos]' value='<%= node.default_value %>' style="width:40px;margin-bottom:0px;text-align:right"  <% if(node.readonly?)  %> class="quiet" readonly="readonly" <% end %> >&nbsp;%
+          </span>
+      </div>
+    <% else   %>
+      <div class="span-20 last">
+        <% node.get_indent.times do %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <% end %>
+        <span>
+          <% if !node.da_ne? && !node.optional? && node.type != :enum && node.type != :title  %>
+            <%= f.text_field node.name , :size => node.get_size, :class => node.get_class %>
+          <% end %>
+          <% if node.type == :title %>
+            <!--
+            <br/>
+            <hr>
+            <h5><%= t(node.name, :scope => params[:osiguranje].to_sym) %></h5>
+            -->
+          <% end %>
+          <% if node.type == :enum && !node.da_ne? %>
+            <%= f.select node.name, node.possible_values.collect {|v| [ t(v, :scope => params[:osiguranje].to_sym), v ] }  %>
+          <% end %>
+        </span>
+        <% if node.type != :title %>
+          <span>
+            &nbsp;(<%= f.label node.name, t(node.name, :scope => params[:osiguranje].to_sym)%>)
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %> 
+<br />
+<% end %>

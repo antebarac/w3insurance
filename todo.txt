@@ -1,0 +1,24 @@
+* pukli su i glazbala i sirovine i ao - trebamo dopisati testove za njih
+* Provjera cjenika/scheme ... ovo treba svakako napisati da ostanemo fleksibilni - jer promjena ce sigurno biti puno
+
+Spremanje i citanje iz baze
+Brisanje stavke
+Edit stavke
+Kratkotrajni faktori, pro rata, trajanje osiguranja
+
+
+somday/maybe
+----------------------------------------------
+Upozorenje strucna sluzba - stopa se mora odrediti naknadno - dozvoliti upis
+Fokus na novododano polje
+
+
+done
+----------------------------------------------
+Postotak izracunatog doplatka se zaokruzi na cijeli broj 
+Funkcije
+Validacije na osiguranju
+Lijevi zatvoreni range 19.10.2009
+Zajednicki doplaci  20.10.2009
+Bug kod glazbala - ne povuce opis doplatka, mislim da ima veze sa Z grupom jer prvo je pucao kod posto Z nije postojao, a sada daje krivi opis 01.11.2009
+Struktura produkta - koji doplatak ide na koje osiguranje itd... 25.11.2009

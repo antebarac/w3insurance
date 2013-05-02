@@ -1,0 +1,45 @@
+Popust na invaliditet
+==========================================================
+invaliditet                       oznaka          popust
+----------------------------------------------------------
+80_i_vise                         AO              15% 
+donji_ekst_ili_vid_80_i_vise     AO              20%
+ratni_i_v                         AO              20%
+ratni_vi_x                        AO              15%
+----------------------------------------------------------
+
+Bonus na premiju
+========================================
+premijski_stupanj   oznaka       popust   
+-----------------------------------------
+50_posto            AO            50%  
+55_posto            AO            45%  
+60_posto            AO            40%  
+65_posto            AO            35%  
+70_posto            AO            30%  
+75_posto            AO            25%  
+80_posto            AO            20%  
+85_posto            AO            15%  
+90_posto            AO            10%  
+-----------------------------------------
+
+Malus na premiju
+============================================
+premijski_stupanj   oznaka        doplatak
+--------------------------------------------
+115_posto           AO              15%
+130_posto           AO              30%
+150_posto           AO              50%
+170_posto           AO              70%
+190_posto           AO              90%
+210_posto           AO             110%
+230_posto           AO             130%
+250_posto           AO             150%
+--------------------------------------------
+
+Popust na starodobno vozilo
+============================================
+oldtimer            oznaka          popust
+--------------------------------------------
+da                  AO              50%
+--------------------------------------------

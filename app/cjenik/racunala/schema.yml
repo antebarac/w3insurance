@@ -1,0 +1,78 @@
+NAZIV: Osiguranje računala
+
+Z[!POTRES,!NEZGODA]:
+  postotak_sudjelovanja_u_steti*: [ sudjelovanje_10, sudjelovanje_0, ostalo_manje_od_10, sudjelovanje_15, sudjelovanje_20, sudjelovanje_25, ostalo_preko_10 ]
+  vrsta_uredjaja_za_gasenje*: [nema_uredjaja, automatski_s_CO2_ili_halonom, uredjaj_koji_dojavljuje_pozar, uredjaj_za_neprekidno_napajanje]
+  doplatak_za_osiguranje_amortizirane_vrijednosti*:
+    ne: []
+    da:
+      prosjecna_otpisanost_opreme*: decimal 
+  doplatak_za_povecanu_opasnost?: =10%-30%
+  popust_na_garanciju?: =do 20%
+  doplatak_za_troskove_popravka?: =6.3%
+  doplatak_troskovi_inozemstvo?: =6.3%-25%
+  doplatak_za_trazenje_greske[I]?: =6.3%
+  doplatak_izmisljeni[II1PG]?: =8.2%
+
+I:
+  opis: text
+  adresa: text
+  vrijednost_sustava*: money
+  procesna_racunala*: 
+    nije_procesno_racunalo: []
+    samostalna:
+      vrijednost_procesnih_racunala*: money
+    ugradjena:
+      vrijednost_procesnih_racunala*: money
+  pojedinacno_racunalo*: 
+    ne:
+      poseban_dogovor*:
+        nema_posebnog_dogovora: []
+        bankomati:
+          popis_bankomata*: text
+        osobna_racunala:
+          broj_racunala*: integer
+        licence_programa:
+          cijena_licenci*: money
+    da:
+      vrijednost_pojedinacnih_uredjaja*: money
+
+II1PG!:
+  ne: []
+  da:
+    vrijednost_sustava*: money 
+    trosak_ponovnog_dnevnog_unosa*: money
+    procesna_racunala*: 
+      nije_procesno_racunalo: []
+      samostalna:
+        vrijednost_procesnih_racunala*: money
+      ugradjena:
+        vrijednost_procesnih_racunala*: money
+    povecana_pouzdanost*: [ ne, da]
+  
+II2PG!:
+  ne: []
+  da:
+    trosak_ponovnog_unosa_i_instaliranja*: money
+
+III!:
+  ne: []
+  da:
+    vrijednost_sustava*: money
+    trosak_za_najam*: money
+    fransiza*: [ 2d, 3d, 5d, 10d, 20d ]
+    jamstveno_razdoblje*: [ 1g, 9m, 6m, 3m, 2m, 1m ]
+
+POTRES!:  
+  ne: []
+  da:
+    vrijednost_sustava*: money
+    vrsta_objekta*: [stambeni_do_1964, stambeni_od_1965, neproizvodni_do_1964, neproizvodni_od_1965, obrti_do_1964, obrti_od_1965]
+    potresna_zona*: [1a, 1b] 
+    fransiza_potres*: [bez, 2_posto, 5_posto, ostalo]
+
+
+NEZGODA!:
+  ne: []
+  da:
+    iznos_nezgoda*: money 
