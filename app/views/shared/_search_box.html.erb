@@ -1,0 +1,10 @@
+<% form_tag request.path, :method => 'get' do %>
+ <div class="navBox">
+    <div class="h"><%= title %></div>
+	<div class="c">
+	<%= body %>
+   	<%= submit_tag "Prikazi" , :name => nil %>
+	</div>
+ </div>
+<% end %>
+

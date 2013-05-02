@@ -1,0 +1,123 @@
+<% content_for :script do %>
+<script type="text/javascript">
+  
+  function onClickUgovaratelj(e) 
+  {
+    id = $(e.target).parent().attr("id");
+    name = $(e.target).parent().children().eq(1).text();
+    $("span#ugovaratelj").text(name);
+    $("input#polica_ugovaratelj_id").attr("value", id);
+    if ( $("span#osiguranici div").size() == 0 ) dodajOsiguranika(name,id);
+    $("div#partneri").dialog("close");
+    return false;
+  };
+
+  function onClickOsiguranici(e) 
+  {
+    id = $(e.target).parent().attr("id");
+    name = $(e.target).parent().children().eq(1).text();
+    if ($("span#osiguranici div#osiguranik_" + id).size() > 0) 
+    { 
+      sabreAlert( "Dodavanje nije moguće. ", name + " je već dodan u listu osiguranika" );
+    }
+    else
+    {
+      dodajOsiguranika(name,id);
+      $("div#partneri").dialog("close");
+    }
+    return false;
+  }
+
+  function obrisiOsiguranika(name, id)
+  {
+    sabreConfirm("Potvrda brisanja", "Da li ste sigurni da želite obristati osiguranika <b>" + name + "</b>?",
+      function() { $("div#osiguranik_" + id).remove(); });
+
+  }
+
+  function dodajOsiguranika(name, id)
+  {
+    osiguranikSpan = $("span#osiguranici").append("<div id='osiguranik_" + id + "' class='ui-helper-clearfix'></div>");
+    $(function() {
+      osiguranikSpan = $("div#osiguranik_" + id);
+      addIconClick(osiguranikSpan, 'circle-close', "obrisiOsiguranika('" + name + "'," + id + ")");
+      osiguranikSpan.append("<span class='osiguranik'>&nbsp;" + name + "</span><input type='hidden' name='osiguranici[partner_id][]' value='" 
+        + id + "'/></div>");
+    });
+  }
+
+  $(function(){
+
+    $(".btn-slide").click(function(){
+      $("#panel").slideToggle("slow");
+      $(this).toggleClass("active"); return false;
+    });
+    
+    $(".accordion").accordion( {
+      collapsible: true,
+      active: 0,
+      clearStyle: true
+    });
+     
+  });
+</script>
+<% end %>
+<% content_for :titlebar do %>
+<%= @schema.naziv %>
+<% end %>
+<div class="span-24 last">
+<%= form_for(@polica) do |f| %>
+    <div id="osiguranja"></div>
+    <% @polica.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+   <% end %>
+    <div class="span-17">
+      <fieldset class="ui-corner-all" style="margin-top: -7px">
+        <legend>Ugovorne stranke</legend>
+          <div class="span-3"><%= f.label :ugovaratelj %>:</div>
+          <div class="span-4">
+            <span id="ugovaratelj"></span>
+            <span class="ui-helper-clearfix"><%= ui_icon_click "arrowthickstop-1-n", "showDialog('kontakti', 'ugovaratelj', onClickUgovaratelj)" %></span>
+            <%= f.hidden_field(:ugovaratelj_id) %>
+          </div>
+          <div class="span-3 prepend-1"><%= f.label 'Osiguranici' %>:</div>
+          <div class="span-4 last">
+            <span id="osiguranici"></span>
+            <span class="ui-helper-clearfix"><%= ui_icon_click "arrowthickstop-1-n", "showDialog('kontakti', 'osiguranici', onClickOsiguranici)" %></span>
+          </div>
+      </fieldset>
+      <fieldset class="ui-corner-all">
+        <legend>Trajanje</legend>
+        <div class="span-3"><%= f.label :od %>:</div>
+        <div class="span-4"><%= f.text_field :traje_od, :class => :datepicker %></div>
+        <div class="span-3 prepend-1"><%= f.label :do %>:</div>
+        <div class="span-4 last"><%= f.text_field :traje_do, :class => :datepicker %></div>
+      </fieldset>
+      <fieldset id="stavke" class='ui-corner-all' style="display:none"> 
+        <legend>Stavke</legend>
+        <span id="stavke_osiguranja"></span>
+        <div class="span-11">UKUPNO:</div><div class="span-4 last right"><span id="stavke-suma" class="ui-widget-header ui-corner-all">0,00 kn</div>
+      </fieldset>
+    </div>
+    <div class="span-7 last">
+      <div class="accordion">
+        <h3><a href="#">Dodaj osiguranje</a></h3>
+        <div>
+        <ul>
+          <%  @schema.premijske_grupe.each_pair do |key, premijska_grupa| %>
+          <li>
+            <a id="osiguranje_<%= premijska_grupa.oznaka %>" href="#" 
+            onclick="showOsiguranja('<%= @schema.oznaka_cjenika %>',
+            '<%= premijska_grupa.oznaka %>', '<%= premijska_grupa.opis %>')"><%= premijska_grupa.opis %> (<%= premijska_grupa.oznaka %>)</a>
+          </li>
+          <% end %> 
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="span-17 last button-bar">
+    <%= f.submit 'Spremi'%>
+  </div>
+</div>
+<% end %>
+

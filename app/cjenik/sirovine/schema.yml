@@ -1,0 +1,11 @@
+NAZIV: Osiguranje sirovina
+
+I:
+  opis: text
+  osigurani_iznos*: money
+  vrsta*: [nemetalne_rude, gradjevinska_industrija, metalna_industrija, elektromehanicka_industrija, industrija_preciznih_proizvoda,
+           kemijska_industrija, industrija_koze, industrija_papira, graficka_industrija, drvna_industrija, prehrambena_industrija]
+  vrijeme_kvarenja*: [nije_osjetljivo, do_2_sata, do_4_sata, do_8_sati, do_1_dan, do_2_dana, do_3_dana, do_5_dana, do_7_dana]
+  stetna_ucestalost: decimal
+  odbitna_fransiza*: [ fransiza_20,  fransiza_0, fransiza_10, fransiza_ostalo_doplatak, fransiza_30, fransiza_ostalo_popust ]
+

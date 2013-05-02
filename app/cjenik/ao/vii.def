@@ -1,0 +1,29 @@
+Osiguranje prikljucnih vozila
+======================================================================
+najveca_dopustena_masa      oznaka          stopa
+----------------------------------------------------------------------
+0..750                      AO              3.2%
+751..3500                   AO              3.3%
+3501..10000                 AO              3.4%
+10001..18000                AO              3.6%
+18001..26000                AO              4.0%
+26001..inf.                 AO              4.7%
+----------------------------------------------------------------------
+
+Doplatak za osiguranje teretnih prikolica i poluprikolica koje povremeno ili stalno služe za prijevoz eksplozivnih i lako zapaljivih tvari i plinova smještenih u posebnim posudama (kontejnerima) na teretnom sanduku kao i za osiguranje prikolica i poluprikolica - cisterni koje povremeno ili stalno služe za prijevoz ovih materijala
+======================================================================
+prijevoz_opasnih_tvari      oznaka          doplatak
+----------------------------------------------------------------------
+da                          AO              45.0%
+----------------------------------------------------------------------
+
+
+Popust za posebnu namjenu
+======================================================================
+posebna_namjena             oznaka          popust          opis
+----------------------------------------------------------------------
+kampiranje_stanovanje       AO              20%             Popust za osiguranje prikolica i poluprikolica namijenjenih za kampiranje i stanovanje, za pčelarske potrebe, za vatrogasne potrebe i za pokretne biblioteke
+prijevoz_automobila         AO              10%             Popust za osiguranje prikolica i poluprikolica namijenjenih za prijevoz automobila, za radionice i zabavne radnje
+----------------------------------------------------------------------
+
+

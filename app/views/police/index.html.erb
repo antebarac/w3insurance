@@ -1,0 +1,44 @@
+<% content_for :script do %>
+<script type="text/javascript">
+  $(function() {
+    $("#nova-polica").accordion({
+      active: 2,
+      collapsible: true
+    });
+  });
+</script>
+<% end %>
+<% content_for :titlebar do%>
+  <h2><%=t :police %></h2>
+<% end %>
+<table>
+  <tr>
+  <th class="ui-widget-header"><%= Polica.human_attribute_name('pocetak') %></th>
+    <th class="ui-widget-header">Kraj</th>
+    <th class="ui-widget-header">Ugovaratelj</th>
+  </tr>
+
+<% @police.each do |polica| %>
+  <tr>
+    <td class="ui-widget-content"><%=h polica.traje_od %></td>
+    <td class="ui-widget-content"><%=h polica.traje_do %></td>
+    <td class="ui-widget-content"><%=h polica.ugovaratelj.to_s %></td>
+    <td><%= link_to 'Pokazi', polica %></td>
+    <td><%= link_to 'Izmjeni', edit_polica_path(polica) %></td>
+    <td><%= link_to 'Obrisi', polica, :confirm => 'Da li ste sigurni?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<div id="nova-polica" class="span-24 last">
+  <h3><a href="#">Nova polica</a></h3>
+  <div class="">
+    <ul>
+    <% @cjenici.each do |cjenik| %>
+      <li><%= link_to cjenik.naziv, :controller => 'police', :action => 'new', :cjenik => cjenik.oznaka %></li>
+    <% end %>
+  </ul>
+  </div>
+</div>

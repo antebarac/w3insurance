@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  traje_od: 2010-06-17 19:55:41
+  traje_do: 2010-06-17 19:55:41
+  broj: MyString
+
+two:
+  traje_od: 2010-06-17 19:55:41
+  traje_do: 2010-06-17 19:55:41
+  broj: MyString

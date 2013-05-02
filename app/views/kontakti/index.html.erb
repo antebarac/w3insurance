@@ -1,0 +1,46 @@
+<script type="text/javascript">
+  var sifrantKontakti = new sifrant("kontakti", "kontakt", "table#kontaktiTable");
+  sifrantKontakti.init(<% if params[:popup] == "1" %>true<% else %>false<%  end %>);
+</script>
+<span id="view-kontakti"> 
+  <% if params[:popup].nil? %>
+    <div class="span-24 last">
+  <% else %>
+    <div id="info-popup" class="span-18 last"></div>
+    <div class="span-18 last">
+  <% end %>
+  <div id="toolbar">
+    <button id="new" primary-icon="circle-plus" type="button" onclick="sifrantKontakti.novo()">Novi partner</button>
+  </div>
+  <%= search_form :id => 'kontakti', :name => 'sifrantKontakti' %>
+  <div class="ui-helper-clearfix"></div>
+  <table class="main-table" id="kontaktiTable">
+    <thead>
+      <tr>
+        <th class='ui-widget-header ui-state-default'>&nbsp;</th>
+        <th class='ui-widget-header ui-state-default'>Naziv</th>
+        <th class='ui-widget-header ui-state-default'>Vrsta</th>
+        <th class='ui-widget-header ui-state-default'>Oib</th>
+        <th class='ui-widget-header ui-state-default'>Matični broj</th>
+      </tr>
+    </thead>
+    <tbody> 
+      <% @kontakti.each do |kontakt| %>
+        <tr id="<%= kontakt.id %>">
+          <td class="notClickable" width=40px>
+           <a href="javascript:sifrantKontakti.obrisi(<%= kontakt.id %>,
+             'Da li ste sigurni da zelite obrisati kontakt <%= kontakt.to_s %>?')" title="Obrisi"><span class='ui-icon ui-icon-trash'></span></a>
+           <a href="javascript:sifrantKontakti.izmijeni(<%= kontakt.id %>)" title="Izmijeni"><span class='ui-icon ui-icon-gear'></span></a>
+          </td>
+            <td><%=h kontakt.formatirani_naziv %></td> 
+            <td><%=h kontakt.vrsta %></td>
+            <td><%=h kontakt.oib %></td>
+            <td><%=h kontakt.maticni_broj %></td>
+         </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br/>
+  <%= will_paginate @kontakti %>
+</span>
+

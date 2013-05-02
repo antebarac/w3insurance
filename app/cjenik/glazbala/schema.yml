@@ -1,0 +1,7 @@
+NAZIV: Osiguranje glazbala
+
+I:
+  opis: text
+  osigurani_iznos*: money
+  vrsta*: [glazbeni_instrumenti, solisticki_koncerti_rijetko_premjestanje, solisticki_koncerti_prenosivi ]
+  doplatak_za_osiguranje_amortizirane_vrijednosti?: =25% 

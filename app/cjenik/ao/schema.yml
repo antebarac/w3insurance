@@ -1,0 +1,93 @@
+NAZIV: Auto odgovornost
+
+Z:
+  invaliditet[I,VI]: [ne, 80_i_vise, donji_ekst_ili_vid_80_i_vise, ratni_i_v, ratni_vi_x] 
+  premijski_stupanj*: [ 100_posto, 50_posto, 55_posto, 60_posto, 65_posto, 70_posto, 75_posto, 80_posto, 85_posto, 90_posto, 115_posto, 130_posto, 150_posto, 170_posto, 190_posto, 210_posto, 230_posto, 250_posto ]
+  oldtimer[I, VI]*: [ne, da]
+
+I:
+  registracija*: text
+  snaga*: decimal
+  taxi_vozilo*:  [ne, da] 
+  vise_od_6_mjesta*: [ne, da]
+  rent_a_car*:  [ne, da]
+
+II:
+  registracija*: text
+  prijevoz_kosnica*:
+    ne:
+      vrsta:
+        teretni_osim_sedlastih:
+          najveca_dopustena_masa*: decimal
+        sedlasti:
+          snaga*: decimal
+      prijevoz_opasnih_tvari*: [ne, da]
+      iznajmljivanje_bez_vozaca*: [ne, da]
+      prijevoz_pokojnika_vatrogasni_fekalije_automobili*: [ne, da]
+      mup_hv_kampiranje_stanovanje_biblioteke_zabavni*: [ne, da]
+      medicinski*: [ne, da]
+    da: []
+
+III:
+  registracija*: text
+  vrsta*: [autobus_inter, prikolica_inter, autobus_grad, prikolica_grad]
+  registriranih_mjesta*: decimal
+  rent_a_bus*: [ne, da]
+
+IV:
+  registracija*: text
+  snaga*: decimal
+  prijevoz_eksplozivnih_tvari*: [ne, da]
+
+V:
+  registracija*: text
+  podgrupa*: [bager, buldozer, busac, cekicar, drobilica, freza, kopac, utovarivac, rovokopac, jez, valjak, mjesalica, viseradni_stroj, finiser, 
+  za_specijalne_terete, posebne_namjene, dizalica, kompresor, presa, dozirac, pumpe, vilicar, separator_agregatnog_stanja, probijac, mjenjac, 
+  odvajac_materijala, cistilica, kombajni, kosilice, prskalice, ralice, motokultivator_s_prikljuckom, motorne_pile]
+
+VI:
+  registracija*: text
+  obujam_motora*: decimal
+  rent_a_motocikl*: [ne, da]
+
+VII:
+  registracija*: text
+  najveca_dopustena_masa*: decimal
+  prijevoz_opasnih_tvari*: [ne, da]
+  posebna_namjena: [ ne, kampiranje_stanovanje, prijevoz_automobila ]
+
+VIII:
+  registracija*: text
+  vrsta_vozila_ino*:
+    osobni_automobili: []       
+    motocikl_moped: []      
+    teretno_do_3000:
+      prijevoz_opasnih_tvari*: [ne, da] 
+    teretno_preko_3000:
+      prijevoz_opasnih_tvari*: [ne, da]
+    sedlasti_tegljac:       
+      prijevoz_opasnih_tvari*: [ne, da]
+    traktori:
+      prijevoz_opasnih_tvari*: [ne, da]
+    radni_stroj:
+      prijevoz_opasnih_tvari*: [ne, da]
+    bicikl_s_motorom: []
+    autobus: []                
+    laka_prikolica:
+      prijevoz_opasnih_tvari*: [ne, da]
+    kamp_prikolica:
+      prijevoz_opasnih_tvari*: [ne, da]
+    teretna_prikolica:
+      prijevoz_opasnih_tvari*: [ne, da]
+  trajanje*: [ do_15, do_30, do_90, do_180]
+
+IX:
+  registracija*: text
+  vrsta_vozila*: [osobni_automobili, traktori_prikljucna_vozila_mopedi_motocikli, ostalo]
+  dodatni_dani_trajanja: decimal
+
+X:
+  registracija*: text
+  vrsta_vozila_izvoz*: [ osobni_automobili, motocikl_moped, teretno_do_3000, teretno_preko_3000_do_12000, teretno_preko_12000, sedlasti_tegljac, traktori, 
+    radni_stroj, autobus, autobusne_prikolice, laka_i_kapm_prikolica_do_750, prikolica_preko_750_do_3500, prikolica_preko_3500] 
+  trajanje*: [15dana, 30dana, 45dana]

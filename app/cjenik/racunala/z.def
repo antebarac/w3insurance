@@ -1,0 +1,49 @@
+Doplatak za osiguranje amortizirane vrijednosti
+#poo = prosjecna_otpisanost_opreme
+=================================================================
+prosjecna_otpisanost_opreme      oznaka       doplatak          
+-----------------------------------------------------------------
+30-70                             S111         =poo + 5       
+70-100                            S111         =100          
+-----------------------------------------------------------------
+
+Popust na uređaje za otkrivanje i gašenje požara
+==============================================================================================================================================
+vrsta_uredjaja_za_gasenje                oznaka                 popust                opis
+---------------------------------------------------------------------------------------------------------------------------------------------
+automatski_s_CO2_ili_halonom              P111                     8%       Automatski uređaj za gašenje sa CO2 ili halonom
+uredjaj_koji_dojavljuje_pozar             P112                     6%       Uređaj koji automatski dojavljuje nastanak požara
+uredjaj_za_neprekidno_napajanje           P131                     5%       Uređaj za neprekidno napajanje računalnih sustava (UPS)  
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+Sudjelovanje osiguranika u šteti - doplatak
+===========================================================================================================
+postotak_sudjelovanja_u_steti       oznaka         doplatak                 opis
+-----------------------------------------------------------------------------------------------------------
+sudjelovanje_0                      S311              50%                   Doplatak na sudjelovanje u šteti od 0% 
+ostalo_manje_od_10                  S31A              0.00%                 - 
+-----------------------------------------------------------------------------------------------------------
+
+Sudjelovanja osiguranika u šteti - popust
+==========================================================================================================================================
+postotak_sudjelovanja_u_steti       oznaka          popust          opis
+------------------------------------------------------------------------------------------------------------------------------------------
+sudjelovanje_15                     P311            6%              Popust na sudjelovanje u šteti od 10% (najmanje 500kn najviše 40.000kn)
+sudjelovanje_20                     P312            11%             Popust na sudjelovanje u šteti od 11% (najmanje 500kn najviše 60.000kn)
+sudjelovanje_25                     P313            17%             Popust na sudjelovanje u šteti od 17% (najmanje 500kn najviše 80.000kn
+ostalo_preko_10                     P31A            0.00%           Popust na sudjelovanje - odredila stručna služba
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#begin 
+=========================================================================================================================
+tip   naziv                                   oznaka        opis
+-------------------------------------------------------------------------------------------------------------------------
+ D    doplatak_za_troskove_popravka            R111         Doplatak za troškove popravka za prekovremeni i noćni rad, rad u praznične dane te hitni prijevoz 
+ D    doplatak_troskovi_inozemstvo             R211         Doplatak za povećane troškova popravka u inozemstvu 
+ D    doplatak_za_trazenje_greske              R311         Doplatak za troškove traženja greške
+ D    doplatak_za_povecanu_opasnost            S211         Doplatak za povećanu opasnost
+ P    popust_na_garanciju                      P411         Popust na garanciju
+ D    doplatak_izmisljeni                      I411         Doplatak za izmisljenu stvar
+-------------------------------------------------------------------------------------------------------------------------
+#end
